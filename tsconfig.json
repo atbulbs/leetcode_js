@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "target": "es5",
+    "outDir": "bin-debug",
+    "experimentalDecorators": true,
+    "lib": [
+      "es5",
+      "dom",
+      "es2015.promise",
+      "esnext"
+    ],
+    "types": ["node", "jest"],
+    "typeRoots": ["./src/types", "node_modules/@types"],
+    "declaration": true,
+    "declarationDir": "lib/types"
+  },
+  "include": [
+    "src/main.ts",
+    "test",
+    "./store2.d.ts"
+  ]
+}
