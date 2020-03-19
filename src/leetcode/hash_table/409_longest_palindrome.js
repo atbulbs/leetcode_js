@@ -85,3 +85,34 @@ var longestPalindrome = function(s) {
 
 var s = "adam"
 console.warn(longestPalindrome(s))
+
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var longestPalindrome = function(s) {
+  const hashTable = {}
+  for (let i = s.length; i > 0; --i) {
+    if (hashTable[s[i]] === undefined) {
+      hashTable[s[i]] = 1
+    } else {
+      ++hashTable[s[i]]
+    }
+  }
+  const keyArr = Object.keys(hashTable)
+  let res = 0
+  let hasOdd = false
+  keyArr.forEach(str => {
+    const count = hashTable[str]
+    // 偶数
+    if ((count & 1) === 0) {
+      res += count
+    } else {
+      hasOdd = true
+      if (count > 1) {
+        res += (count - 1)
+      }
+    }
+  })
+  return hasOdd ? ++res : res
+};
