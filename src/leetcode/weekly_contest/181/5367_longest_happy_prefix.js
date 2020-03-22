@@ -21,3 +21,20 @@ var s = "level"
 // var s = "ababab"
 // var s = "leetcodeleet"
 console.warn(longestPrefix(s))
+
+var longestPrefix = function(s) {
+  if (s.length <= 1) {
+    return ''
+  } else {
+    let len = s.length - 1
+    while (len > 0) {
+      const prefix = s.substr(0, len)
+      const postfix = s.substr(s.length - len, len)
+      if (prefix === postfix) {
+        return prefix
+      }
+      --len
+    }
+    return ''
+  }
+};
