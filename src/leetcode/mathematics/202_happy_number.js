@@ -49,5 +49,9 @@ var isHappy = function (n) {
     slowPointer = getBitSquareSum(slowPointer)
     fastPointer = getBitSquareSum(getBitSquareSum(fastPointer))
   } while (slowPointer !== fastPointer)
+  console.warn('slowPointer', slowPointer)
   return slowPointer === 1
 }
+
+isHappy(19)
+isHappy(37)
