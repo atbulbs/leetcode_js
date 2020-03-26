@@ -31,3 +31,66 @@ let numRookCaptures = (board) => {
 // const test = [[".",".",".",".",".",".",".","."],[".",".",".","p",".",".",".","."],[".",".",".","p",".",".",".","."],["p","p",".","R",".","p","B","."],[".",".",".",".",".",".",".","."],[".",".",".","B",".",".",".","."],[".",".",".","p",".",".",".","."],[".",".",".",".",".",".",".","."]]
 const test = [[".",".",".",".",".",".",".","."],[".","p","p","p","p","p",".","."],[".","p","p","B","p","p",".","."],[".","p","B","R","B","p",".","."],[".","p","p","B","p","p",".","."],[".","p","p","p","p","p",".","."],[".",".",".",".",".",".",".","."],[".",".",".",".",".",".",".","."]]
 console.warn(numRookCaptures(test))
+
+/**
+ * @param {character[][]} board
+ * @return {number}
+ */
+var numRookCaptures = function(board) {
+  let res = 0
+  let rowRook
+  let columnRook
+  for (let i = 0; i < 8; ++i) {
+    for (let j = 0; j < 8; ++j) {
+      if (board[i][j] === 'R') {
+        rowRook = i
+        columnRook = j
+      }
+    }
+  }
+  // left
+  for (let row = rowRook - 1; row >= 0; --row) {
+    const chessPiece = board[row][columnRook]
+    if (chessPiece === 'p') {
+      res += 1
+      break
+    } else if (chessPiece === 'B') {
+      break
+    }
+  }
+  // right
+  for (let row = rowRook + 1; row < 8; ++row) {
+    const chessPiece = board[row][columnRook]
+    if (chessPiece === 'p') {
+      res += 1
+      break
+    } else if (chessPiece === 'B') {
+      break
+    }
+  }
+  // top
+  for (let column = columnRook - 1; column >= 0; --column) {
+    const chessPiece = board[rowRook][column]
+    if (chessPiece === 'p') {
+      res += 1
+      break
+    } else if (chessPiece === 'B') {
+      break
+    }
+  }
+  // bottom
+  for (let column = columnRook + 1; column < 8; ++column) {
+    const chessPiece = board[rowRook][column]
+    if (chessPiece === 'p') {
+      res += 1
+      break
+    } else if (chessPiece === 'B') {
+      break
+    }
+  }
+  return res
+};
+
+// const test = [[".",".",".",".",".",".",".","."],[".",".",".","p",".",".",".","."],[".",".",".","p",".",".",".","."],["p","p",".","R",".","p","B","."],[".",".",".",".",".",".",".","."],[".",".",".","B",".",".",".","."],[".",".",".","p",".",".",".","."],[".",".",".",".",".",".",".","."]]
+const test = [[".",".",".",".",".",".",".","."],[".","p","p","p","p","p",".","."],[".","p","p","B","p","p",".","."],[".","p","B","R","B","p",".","."],[".","p","p","B","p","p",".","."],[".","p","p","p","p","p",".","."],[".",".",".",".",".",".",".","."],[".",".",".",".",".",".",".","."]]
+console.warn(numRookCaptures(test))
