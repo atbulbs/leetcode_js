@@ -13,3 +13,39 @@ var climbStairs = function(n) {
     return array[n - 1]
   }
 };
+
+var climbStairs = function(n) {
+  if (n < 1) {
+    return 0
+  } if (n === 1) {
+    return 1
+  } if (n === 2) {
+    return 2
+  } else {
+    let cur = 2
+    let pre = 1
+    for (let i = 3; i <= n; ++i) {
+      const temp = cur
+      cur = pre + cur
+      pre = temp
+    }
+    return cur
+  }
+};
+
+var climbStairs = function(n) {
+  if (n < 1) {
+    return 0
+  } if (n === 1) {
+    return 1
+  } if (n === 2) {
+    return 2
+  } else {
+    let cur = 2
+    let pre = 1
+    for (let i = 3; i <= n; ++i) {
+      [pre, cur] = [cur, pre + cur]
+    }
+    return cur
+  }
+};
