@@ -100,7 +100,8 @@
 //     return helper(amount)
 //   }
 // };
-// 没有总结, 形成方法论, 下一次又做不出来了, 浪费时间
+// 没有总结, 形成方法论, 下一次又做不出来了, 浪费时间,
+// 所以要提升思想境界, 总结方法论, 内功心法, 并复述出来
 /**
  * @param {number[]} coins
  * @param {number} amount
@@ -181,11 +182,90 @@ var coinChange = function(coins, amount) {
 //   return makeChange(amount).length || -1
 // };
 
+/**
+ * @param {number[]} coins
+ * @param {number} amount
+ * @return {number}
+ */
+//
+// 定义dp(total, n)为总金额为total且最后一枚硬币为面值n时最小硬币个数
+// coins[i]为每种硬币的面值
+// dp(total, n) = min(dp(total - n, coins[i])) + 1
+// var coinChange = function(coins, amount) {
+//   let res
+//   if(amount < 0) {
+//     return -1
+//   }
+//   for (let i = 0; i < coins.length; ++i) {
+//     const value = coins[i]
+//     let _res
+//     if (value < amount) {
+//       _res = coinChange(coins, amount - value) + 1
+//     } else if (value === amount) {
+//       _res = 1
+//     } else {
+//       _res = -1
+//     }
+//     if (res === undefined) {
+//       res = _res
+//     }
+//     if (_res !== -1 && _res !== 0 && _res < res) {
+//       res = _res
+//     }
+//   }
+//   return res || -1
+// };
+// 定义状态dp(i)为总金额为i时的最小找零数量
+// 状态转移方程dp(i) = min(dp(i - n)) + 1
+var coinChange = function(coins, amount) {
+  if (amount <= 0) {
+    return 0
+  }
+  const memory = {}
+  function dp (amount) {
+    if (memory[amount] !== undefined) {
+      return memory[amount]
+    }
+    let res
+    for (let i = 0; i < coins.length; ++i) {
+      // 当前选择的硬币的面值
+      const value = coins[i]
+      if (value < amount) {
+        // 找出这枚硬币以后剩余的总金额
+        const remain = dp(amount - value)
+        if (remain !== -1) {
+          if (res === undefined) {
+            res = remain + 1
+          }
+          if (remain + 1 < res) {
+            res = remain + 1
+          }
+        }
+      } else if (value === amount) {
+        // 这枚硬币的面值刚好等于总金额, 则退出循环
+        res = 1
+        break
+      }
+    }
+    // 考虑每一枚硬币的面值都大于总金额
+    if (res === undefined) {
+      res = -1
+    }
+    return memory[amount] = res
+  }
+  return dp(amount)
+};
+
 var coins = [186,419,83,408]
 var amount = 6249
 
-console.warn(coinChange(coins, amount))
+console.warn(coinChange(coins, amount), 20)
+
 var coins = [2]
 var amount = 3
 
-console.warn(coinChange(coins, amount))
+console.warn(coinChange(coins, amount), -1)
+
+var coins = [1, 2, 5]
+var amount = 11
+console.warn(coinChange(coins, amount), 3)
