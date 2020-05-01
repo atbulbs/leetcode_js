@@ -9,9 +9,11 @@ var singleNumbers = function(nums) {
   nums.forEach(item => {
     all ^= item
   })
+  console.warn('all', all)
   let first1 = 1
   while ((all & first1) === 0) {
-    first1 << 1
+    first1 <<= 1
+    console.warn('first1', first1)
   }
   nums.forEach(item => {
     if ((first1 & item) === 0) {
@@ -22,3 +24,6 @@ var singleNumbers = function(nums) {
   })
   return [res1, res2]
 };
+
+// console.warn(singleNumbers([4,1,4,6]))
+console.warn(singleNumbers([1,2,5,2]))
