@@ -1,6 +1,7 @@
 Function.prototype.myCall = function (context) {
   context = context || window
   const unique = Symbol()
+  // 让绑定的对象有这个方法
   context[unique] = this
   let args = ''
   for (let i = 1; i < arguments.length; ++i) {
