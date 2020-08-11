@@ -12,7 +12,8 @@ Function.prototype.myCall = function (context) {
   }
   console.warn('args', args)
   eval('context[unique](' + args + ')')
-  delete context[unique]
+  // delete context[unique]
+  Reflect.deleteProperty(context, unique)
 }
 
 Function.prototype.myApply = function (context, argsArr) {
